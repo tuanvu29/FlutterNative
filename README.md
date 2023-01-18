@@ -1,3 +1,3 @@
 # Flutter Native
 
-How to use native logic and view components in Flutter
+Example of how to make native logic and view components in Flutter
