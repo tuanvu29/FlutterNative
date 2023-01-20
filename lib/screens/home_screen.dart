@@ -6,12 +6,12 @@ import 'package:tryg_poc_component1/tryg_poc_component1.dart';
 
 import '../widgets/native_view_.dart';
 
-class MyHomePage extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   static const methodChannel = MethodChannel('barometer/method');
   static const pressureChannel = EventChannel('barometer/pressure');
 
@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
     pressureSubscription =
         pressureChannel.receiveBroadcastStream().listen((event) {
       setState(() {
-        _pressureReading = 0;
+        _pressureReading = event;
       });
     });
   }
@@ -64,34 +64,18 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(
                   height: 400,
                   width: width,
-                  child: NativeViewExample(
+                  child: NativeView(
                     viewType: '<platform-view-type>',
                     creationParams: creationParams,
                   )),
-
-              //Container(child: _getName(creationParams), height: 100, width: width),
               TrygComponent1(
                 name: "Peter Petersen",
                 callback: (v) => print('Callback med info $v'),
               ),
-              Text('sensor reading $_sensorAvailable'),
-              ElevatedButton(
-                  onPressed: () => _checkAvailableAsync(), child: const Text('isReady?')),
-              Text('sensor reading $_pressureReading'),
-              ElevatedButton(
-                  onPressed: () => _startReading(), child: const Text('start')),
-              SizedBox(
-                  height: 400,
-                  width: width,
-                  child: NativeViewExample(
-                    viewType: '<platform-view-type>',
-                    creationParams: creationParams,
-                  )),
             ],
           ),
         ),
       ),
     );
   }
-
 }

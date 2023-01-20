@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
-class NativeViewExample extends StatelessWidget {
+class NativeView extends StatelessWidget {
   final String viewType;
   final Map<String, dynamic> creationParams;
 
-  NativeViewExample({super.key, required this.viewType, required this.creationParams});
+  NativeView({super.key, required this.viewType, required this.creationParams});
   
   @override
   Widget build(BuildContext context) {
