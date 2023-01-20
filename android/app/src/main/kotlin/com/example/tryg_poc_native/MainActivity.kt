@@ -19,24 +19,25 @@ class MainActivity : FlutterActivity() {
     private var pressureStreamHandler: StreamHandler? = null
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+        var messenger = flutterEngine.dartExecutor.binaryMessenger
         flutterEngine
             .platformViewsController
             .registry
-            .registerViewFactory("<platform-view-type>", NativeViewFactory())
+            .registerViewFactory("native-experiment", NativeViewFactory())
 
-        setupChannels(this, flutterEngine.dartExecutor.binaryMessenger)
+        setupChannels(this, messenger)
 
 
     }
+
     private fun setupChannels(context: Context, messenger: BinaryMessenger) {
         sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
         methodChannel = MethodChannel(messenger, METHOD_CHANNEL)
-        methodChannel!!.setMethodCallHandler{
-            call, result ->
-            if(call.method == "isSensorAvailable"){
+        methodChannel!!.setMethodCallHandler { call, result ->
+            if (call.method == "isSensorAvailable") {
                 result.success(sensorManager!!.getSensorList(Sensor.TYPE_PRESSURE).isNotEmpty())
-            }else{
+            } else {
                 result.notImplemented()
             }
         }
@@ -46,7 +47,7 @@ class MainActivity : FlutterActivity() {
         pressureChannel!!.setStreamHandler(pressureStreamHandler)
     }
 
-    private fun teardownChannels(){
+    private fun teardownChannels() {
         methodChannel!!.setMethodCallHandler(null)
         pressureChannel!!.setStreamHandler(null)
     }

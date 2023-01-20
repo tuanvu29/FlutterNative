@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 
 void main() {
-  runApp(MinHverdag());
+  runApp(TrygDemo());
 }
 
-class MinHverdag extends StatelessWidget {
+class TrygDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

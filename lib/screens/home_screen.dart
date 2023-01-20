@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 400,
                   width: width,
                   child: NativeView(
-                    viewType: '<platform-view-type>',
+                    viewType: 'native-experiment',
                     creationParams: creationParams,
                   )),
               TrygComponent1(
